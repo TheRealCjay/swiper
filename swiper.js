@@ -235,8 +235,8 @@ var Swiper = (function () {
     }
     function h(e) {
         return (
-            e.querySelector(".swiper-slide-transform") ||
-            (e.shadowRoot && e.shadowRoot.querySelector(".swiper-slide-transform")) ||
+            e.querySelector(".swiper-slide-2-transform") ||
+            (e.shadowRoot && e.shadowRoot.querySelector(".swiper-slide-2-transform")) ||
             e
         );
     }
@@ -532,7 +532,7 @@ var Swiper = (function () {
     const D = (e, t) => {
         if (!e || e.destroyed || !e.params) return;
         const s = t.closest(
-            e.isElement ? "swiper-slide" : `.${e.params.slideClass}`
+            e.isElement ? "swiper-slide-2" : `.${e.params.slideClass}`
         );
         if (s) {
             let t = s.querySelector(`.${e.params.lazyPreloaderClass}`);
@@ -634,7 +634,7 @@ var Swiper = (function () {
                 } = e,
                 o = e.virtual && s.virtual.enabled,
                 d = o ? e.virtual.slides.length : e.slides.length,
-                c = f(i, `.${e.params.slideClass}, swiper-slide`),
+                c = f(i, `.${e.params.slideClass}, swiper-slide-2`),
                 p = o ? e.virtual.slides.length : c.length;
             let m = [];
             const h = [],
@@ -971,15 +971,15 @@ var Swiper = (function () {
                 { slides: t, params: s, slidesEl: a, activeIndex: i } = e,
                 r = e.virtual && s.virtual.enabled,
                 n = e.grid && s.grid && s.grid.rows > 1,
-                l = (e) => f(a, `.${s.slideClass}${e}, swiper-slide${e}`)[0];
+                l = (e) => f(a, `.${s.slideClass}${e}, swiper-slide-2${e}`)[0];
             let o, d, c;
             if (r)
                 if (s.loop) {
                     let t = i - e.virtual.slidesBefore;
                     t < 0 && (t = e.virtual.slides.length + t),
                         t >= e.virtual.slides.length && (t -= e.virtual.slides.length),
-                        (o = l(`[data-swiper-slide-index="${t}"]`));
-                } else o = l(`[data-swiper-slide-index="${i}"]`);
+                        (o = l(`[data-swiper-slide-2-index="${t}"]`));
+                } else o = l(`[data-swiper-slide-2-index="${i}"]`);
             else
                 n
                     ? ((o = t.find((e) => e.column === i)),
@@ -995,7 +995,7 @@ var Swiper = (function () {
                             t ? a.matches(t) && s.push(a) : s.push(a), (e = a);
                         }
                         return s;
-                    })(o, `.${s.slideClass}, swiper-slide`)[0]),
+                    })(o, `.${s.slideClass}, swiper-slide-2`)[0]),
                         s.loop && !c && (c = t[0]),
                         (d = (function (e, t) {
                             const s = [];
@@ -1004,7 +1004,7 @@ var Swiper = (function () {
                                 t ? a.matches(t) && s.push(a) : s.push(a), (e = a);
                             }
                             return s;
-                        })(o, `.${s.slideClass}, swiper-slide`)[0]),
+                        })(o, `.${s.slideClass}, swiper-slide-2`)[0]),
                         s.loop && 0 === !d && (d = t[t.length - 1]))),
                 t.forEach((e) => {
                     O(e, e === o, s.slideActiveClass),
@@ -1065,11 +1065,11 @@ var Swiper = (function () {
             if (t.virtual && i.virtual.enabled && i.loop) u = c(d);
             else if (p) {
                 const e = t.slides.find((e) => e.column === d);
-                let s = parseInt(e.getAttribute("data-swiper-slide-index"), 10);
+                let s = parseInt(e.getAttribute("data-swiper-slide-2-index"), 10);
                 Number.isNaN(s) && (s = Math.max(t.slides.indexOf(e), 0)),
                     (u = Math.floor(s / i.grid.rows));
             } else if (t.slides[d]) {
-                const e = t.slides[d].getAttribute("data-swiper-slide-index");
+                const e = t.slides[d].getAttribute("data-swiper-slide-2-index");
                 u = e ? parseInt(e, 10) : d;
             } else u = d;
             Object.assign(t, {
@@ -1089,7 +1089,7 @@ var Swiper = (function () {
         updateClickedSlide: function (e, t) {
             const s = this,
                 a = s.params;
-            let i = e.closest(`.${a.slideClass}, swiper-slide`);
+            let i = e.closest(`.${a.slideClass}, swiper-slide-2`);
             !i &&
                 s.isElement &&
                 t &&
@@ -1098,7 +1098,7 @@ var Swiper = (function () {
                 [...t.slice(t.indexOf(e) + 1, t.length)].forEach((e) => {
                     !i &&
                         e.matches &&
-                        e.matches(`.${a.slideClass}, swiper-slide`) &&
+                        e.matches(`.${a.slideClass}, swiper-slide-2`) &&
                         (i = e);
                 });
             let r,
@@ -1114,7 +1114,7 @@ var Swiper = (function () {
             (s.clickedSlide = i),
                 s.virtual && s.params.virtual.enabled
                     ? (s.clickedIndex = parseInt(
-                        i.getAttribute("data-swiper-slide-index"),
+                        i.getAttribute("data-swiper-slide-2-index"),
                         10
                     ))
                     : (s.clickedIndex = r),
@@ -1389,7 +1389,7 @@ var Swiper = (function () {
                     if (r) {
                         const t = n * i.params.grid.rows;
                         e = i.slides.find(
-                            (e) => 1 * e.getAttribute("data-swiper-slide-index") === t
+                            (e) => 1 * e.getAttribute("data-swiper-slide-2-index") === t
                         ).column;
                     } else e = i.getSlideIndexByData(n);
                     const t = r
@@ -1424,7 +1424,7 @@ var Swiper = (function () {
                     if (r) {
                         const e = n * i.params.grid.rows;
                         n = i.slides.find(
-                            (t) => 1 * t.getAttribute("data-swiper-slide-index") === e
+                            (t) => 1 * t.getAttribute("data-swiper-slide-2-index") === e
                         ).column;
                     } else n = i.getSlideIndexByData(n);
                 }
@@ -1564,11 +1564,11 @@ var Swiper = (function () {
                         : t.slidesPerView;
             let i,
                 r = e.clickedIndex;
-            const n = e.isElement ? "swiper-slide" : `.${t.slideClass}`;
+            const n = e.isElement ? "swiper-slide-2" : `.${t.slideClass}`;
             if (t.loop) {
                 if (e.animating) return;
                 (i = parseInt(
-                    e.clickedSlide.getAttribute("data-swiper-slide-index"),
+                    e.clickedSlide.getAttribute("data-swiper-slide-2-index"),
                     10
                 )),
                     t.centeredSlides
@@ -1576,7 +1576,7 @@ var Swiper = (function () {
                             r > e.slides.length - e.loopedSlides + a / 2
                             ? (e.loopFix(),
                                 (r = e.getSlideIndex(
-                                    f(s, `${n}[data-swiper-slide-index="${i}"]`)[0]
+                                    f(s, `${n}[data-swiper-slide-2-index="${i}"]`)[0]
                                 )),
                                 l(() => {
                                     e.slideTo(r);
@@ -1585,7 +1585,7 @@ var Swiper = (function () {
                         : r > e.slides.length - a
                             ? (e.loopFix(),
                                 (r = e.getSlideIndex(
-                                    f(s, `${n}[data-swiper-slide-index="${i}"]`)[0]
+                                    f(s, `${n}[data-swiper-slide-2-index="${i}"]`)[0]
                                 )),
                                 l(() => {
                                     e.slideTo(r);
@@ -1600,8 +1600,8 @@ var Swiper = (function () {
                 { params: s, slidesEl: a } = t;
             if (!s.loop || (t.virtual && t.params.virtual.enabled)) return;
             const i = () => {
-                f(a, `.${s.slideClass}, swiper-slide`).forEach((e, t) => {
-                    e.setAttribute("data-swiper-slide-index", t);
+                f(a, `.${s.slideClass}, swiper-slide-2`).forEach((e, t) => {
+                    e.setAttribute("data-swiper-slide-2-index", t);
                 });
             },
                 r = t.grid && s.grid && s.grid.rows > 1,
@@ -1611,7 +1611,7 @@ var Swiper = (function () {
                 d = (e) => {
                     for (let a = 0; a < e; a += 1) {
                         const e = t.isElement
-                            ? v("swiper-slide", [s.slideBlankClass])
+                            ? v("swiper-slide-2", [s.slideBlankClass])
                             : v("div", [s.slideClass, s.slideBlankClass]);
                         t.slidesEl.append(e);
                     }
@@ -1835,12 +1835,12 @@ var Swiper = (function () {
             e.slides.forEach((e) => {
                 const t =
                     void 0 === e.swiperSlideIndex
-                        ? 1 * e.getAttribute("data-swiper-slide-index")
+                        ? 1 * e.getAttribute("data-swiper-slide-2-index")
                         : e.swiperSlideIndex;
                 a[t] = e;
             }),
                 e.slides.forEach((e) => {
-                    e.removeAttribute("data-swiper-slide-index");
+                    e.removeAttribute("data-swiper-slide-2-index");
                 }),
                 a.forEach((e) => {
                     s.append(e);
@@ -2553,13 +2553,13 @@ var Swiper = (function () {
         passiveListeners: !0,
         maxBackfaceHiddenSlides: 10,
         containerModifierClass: "swiper-",
-        slideClass: "swiper-slide",
-        slideBlankClass: "swiper-slide-blank",
-        slideActiveClass: "swiper-slide-active",
-        slideVisibleClass: "swiper-slide-visible",
-        slideFullyVisibleClass: "swiper-slide-fully-visible",
-        slideNextClass: "swiper-slide-next",
-        slidePrevClass: "swiper-slide-prev",
+        slideClass: "swiper-slide-2",
+        slideBlankClass: "swiper-slide-2-blank",
+        slideActiveClass: "swiper-slide-2-active",
+        slideVisibleClass: "swiper-slide-2-visible",
+        slideFullyVisibleClass: "swiper-slide-2-fully-visible",
+        slideNextClass: "swiper-slide-2-next",
+        slidePrevClass: "swiper-slide-2-prev",
         wrapperClass: "swiper-wrapper-2",
         lazyPreloaderClass: "swiper-lazy-preloader",
         lazyPreloadPrevNext: 0,
@@ -2957,19 +2957,19 @@ var Swiper = (function () {
         }
         getSlideIndex(e) {
             const { slidesEl: t, params: s } = this,
-                a = y(f(t, `.${s.slideClass}, swiper-slide`)[0]);
+                a = y(f(t, `.${s.slideClass}, swiper-slide-2`)[0]);
             return y(e) - a;
         }
         getSlideIndexByData(e) {
             return this.getSlideIndex(
                 this.slides.find(
-                    (t) => 1 * t.getAttribute("data-swiper-slide-index") === e
+                    (t) => 1 * t.getAttribute("data-swiper-slide-2-index") === e
                 )
             );
         }
         recalcSlides() {
             const { slidesEl: e, params: t } = this;
-            this.slides = f(e, `.${t.slideClass}, swiper-slide`);
+            this.slides = f(e, `.${t.slideClass}, swiper-slide-2`);
         }
         enable() {
             const e = this;
@@ -3014,7 +3014,7 @@ var Swiper = (function () {
                     .split(" ")
                     .filter(
                         (e) =>
-                            0 === e.indexOf("swiper-slide") ||
+                            0 === e.indexOf("swiper-slide-2") ||
                             0 === e.indexOf(t.params.slideClass)
                     )
                     .join(" ");
@@ -3252,7 +3252,7 @@ var Swiper = (function () {
                                 a.slidePrevClass
                             ),
                                 e.removeAttribute("style"),
-                                e.removeAttribute("data-swiper-slide-index");
+                                e.removeAttribute("data-swiper-slide-2-index");
                         })),
                     s.emit("destroy"),
                     Object.keys(s.eventsListeners).forEach((e) => {
@@ -3437,7 +3437,7 @@ var Swiper = (function () {
                     if (!d || !d().slideShadows) return;
                     s.slides.forEach((e) => {
                         e.querySelectorAll(
-                            ".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left"
+                            ".swiper-slide-2-shadow-top, .swiper-slide-2-shadow-right, .swiper-slide-2-shadow-bottom, .swiper-slide-2-shadow-left"
                         ).forEach((e) => e.remove());
                     }),
                         o();
@@ -3469,7 +3469,7 @@ var Swiper = (function () {
             (e = i
                 ? a
                 : a.filter((e) => {
-                    const s = e.classList.contains("swiper-slide-transform")
+                    const s = e.classList.contains("swiper-slide-2-transform")
                         ? ((e) => {
                             if (!e.parentElement)
                                 return t.slides.find(
@@ -3495,7 +3495,7 @@ var Swiper = (function () {
         }
     }
     function fe(e, t, s) {
-        const a = `swiper-slide-shadow${s ? `-${s}` : ""}${e ? ` swiper-slide-shadow-${e}` : ""
+        const a = `swiper-slide-2-shadow${s ? `-${s}` : ""}${e ? ` swiper-slide-2-shadow-${e}` : ""
             }`,
             i = h(t);
         let r = i.querySelector(`.${a.split(" ").join(".")}`);
@@ -3630,9 +3630,9 @@ var Swiper = (function () {
                         ? ((i = a.renderSlide.call(s, e, t)),
                             "string" == typeof i && ((o.innerHTML = i), (i = o.children[0])))
                         : (i = s.isElement
-                            ? v("swiper-slide")
+                            ? v("swiper-slide-2")
                             : v("div", s.params.slideClass)),
-                    i.setAttribute("data-swiper-slide-index", t),
+                    i.setAttribute("data-swiper-slide-2-index", t),
                     a.renderSlide || (i.innerHTML = e),
                     a.cache && (s.virtual.cache[t] = i),
                     i
@@ -3715,7 +3715,7 @@ var Swiper = (function () {
                     };
                 if (e)
                     s.slides
-                        .filter((e) => e.matches(`.${s.params.slideClass}, swiper-slide`))
+                        .filter((e) => e.matches(`.${s.params.slideClass}, swiper-slide-2`))
                         .forEach((e) => {
                             e.remove();
                         });
@@ -3726,7 +3726,7 @@ var Swiper = (function () {
                             s.slides
                                 .filter((e) =>
                                     e.matches(
-                                        `.${s.params.slideClass}[data-swiper-slide-index="${t}"], swiper-slide[data-swiper-slide-index="${t}"]`
+                                        `.${s.params.slideClass}[data-swiper-slide-2-index="${t}"], swiper-slide-2[data-swiper-slide-2-index="${t}"]`
                                     )
                                 )
                                 .forEach((e) => {
@@ -3757,7 +3757,7 @@ var Swiper = (function () {
                         C.forEach((e) => {
                             s.slidesEl.prepend(d(h[e], e));
                         });
-                f(s.slidesEl, ".swiper-slide, swiper-slide").forEach((e) => {
+                f(s.slidesEl, ".swiper-slide-2, swiper-slide-2").forEach((e) => {
                     e.style[b] = T - Math.abs(s.cssOverflowAdjustment()) + "px";
                 }),
                     M();
@@ -3767,14 +3767,14 @@ var Swiper = (function () {
                 let e;
                 if (void 0 === s.passedParams.virtual.slides) {
                     const t = [...s.slidesEl.children].filter((e) =>
-                        e.matches(`.${s.params.slideClass}, swiper-slide`)
+                        e.matches(`.${s.params.slideClass}, swiper-slide-2`)
                     );
                     t &&
                         t.length &&
                         ((s.virtual.slides = [...t]),
                             (e = !0),
                             t.forEach((e, t) => {
-                                e.setAttribute("data-swiper-slide-index", t),
+                                e.setAttribute("data-swiper-slide-2-index", t),
                                     (s.virtual.cache[t] = e),
                                     e.remove();
                             }));
@@ -3821,10 +3821,10 @@ var Swiper = (function () {
                                 t = {};
                             Object.keys(e).forEach((s) => {
                                 const a = e[s],
-                                    r = a.getAttribute("data-swiper-slide-index");
+                                    r = a.getAttribute("data-swiper-slide-2-index");
                                 r &&
                                     a.setAttribute(
-                                        "data-swiper-slide-index",
+                                        "data-swiper-slide-2-index",
                                         parseInt(r, 10) + i
                                     ),
                                     (t[parseInt(s, 10) + i] = a);
@@ -3844,7 +3844,7 @@ var Swiper = (function () {
                                             t > e &&
                                                 ((s.virtual.cache[t - 1] = s.virtual.cache[t]),
                                                     s.virtual.cache[t - 1].setAttribute(
-                                                        "data-swiper-slide-index",
+                                                        "data-swiper-slide-2-index",
                                                         t - 1
                                                     ),
                                                     delete s.virtual.cache[t]);
@@ -3859,7 +3859,7 @@ var Swiper = (function () {
                                         t > e &&
                                             ((s.virtual.cache[t - 1] = s.virtual.cache[t]),
                                                 s.virtual.cache[t - 1].setAttribute(
-                                                    "data-swiper-slide-index",
+                                                    "data-swiper-slide-2-index",
                                                     t - 1
                                                 ),
                                                 delete s.virtual.cache[t]);
@@ -3923,7 +3923,7 @@ var Swiper = (function () {
                     ) {
                         let e = !1;
                         if (
-                            E(t.el, `.${t.params.slideClass}, swiper-slide`).length > 0 &&
+                            E(t.el, `.${t.params.slideClass}, swiper-slide-2`).length > 0 &&
                             0 === E(t.el, `.${t.params.slideActiveClass}`).length
                         )
                             return;
@@ -5192,7 +5192,7 @@ var Swiper = (function () {
                     panOnMouseMove: !1,
                     toggle: !0,
                     containerClass: "swiper-zoom-container",
-                    zoomedSlideClass: "swiper-slide-zoomed",
+                    zoomedSlideClass: "swiper-slide-2-zoomed",
                 },
             }),
                 (t.zoom = { enabled: !1 });
@@ -5256,7 +5256,7 @@ var Swiper = (function () {
                 return s;
             }
             function C(e) {
-                const s = t.isElement ? "swiper-slide" : `.${t.params.slideClass}`;
+                const s = t.isElement ? "swiper-slide-2" : `.${t.params.slideClass}`;
                 return (
                     !!e.target.matches(s) ||
                     t.slides.filter((t) => t.contains(e.target)).length > 0
@@ -5276,7 +5276,7 @@ var Swiper = (function () {
                 if (((m = !1), (h = !1), g.push(e), !(g.length < 2))) {
                     if (((m = !0), (v.scaleStart = T()), !v.slideEl)) {
                         (v.slideEl = e.target.closest(
-                            `.${t.params.slideClass}, swiper-slide`
+                            `.${t.params.slideClass}, swiper-slide-2`
                         )),
                             v.slideEl || (v.slideEl = t.slides[t.activeIndex]);
                         let a = v.slideEl.querySelector(`.${s.containerClass}`);
@@ -5510,7 +5510,7 @@ var Swiper = (function () {
                     e &&
                         e.target &&
                         (v.slideEl = e.target.closest(
-                            `.${t.params.slideClass}, swiper-slide`
+                            `.${t.params.slideClass}, swiper-slide-2`
                         )),
                         v.slideEl ||
                         (t.params.virtual && t.params.virtual.enabled && t.virtual
@@ -5997,7 +5997,7 @@ var Swiper = (function () {
                 P = (e) => {
                     if (t.a11y.clicked || !t.params.a11y.scrollOnFocus) return;
                     if (new Date().getTime() - o < 100) return;
-                    const s = e.target.closest(`.${t.params.slideClass}, swiper-slide`);
+                    const s = e.target.closest(`.${t.params.slideClass}, swiper-slide-2`);
                     if (!s || !t.slides.includes(s)) return;
                     n = s;
                     const a = t.slides.indexOf(s) === t.activeIndex,
@@ -6013,7 +6013,7 @@ var Swiper = (function () {
                                 r ||
                                     (t.params.loop
                                         ? t.slideToLoop(
-                                            parseInt(s.getAttribute("data-swiper-slide-index")),
+                                            parseInt(s.getAttribute("data-swiper-slide-2-index")),
                                             0
                                         )
                                         : t.slideTo(t.slides.indexOf(s), 0),
@@ -6029,7 +6029,7 @@ var Swiper = (function () {
                     e.slideLabelMessage &&
                         t.slides.forEach((a, i) => {
                             const r = t.params.loop
-                                ? parseInt(a.getAttribute("data-swiper-slide-index"), 10)
+                                ? parseInt(a.getAttribute("data-swiper-slide-2-index"), 10)
                                 : i;
                             h(
                                 a,
@@ -6198,7 +6198,7 @@ var Swiper = (function () {
                     n = t.params.url ? new URL(t.params.url) : a.location;
                     const o =
                         t.virtual && t.params.virtual.enabled
-                            ? t.slidesEl.querySelector(`[data-swiper-slide-index="${s}"]`)
+                            ? t.slidesEl.querySelector(`[data-swiper-slide-2-index="${s}"]`)
                             : t.slides[s];
                     let d = l(o.getAttribute("data-history"));
                     if (t.params.history.root.length > 0) {
@@ -6277,12 +6277,12 @@ var Swiper = (function () {
                         if (t.virtual && t.params.virtual.enabled) {
                             const e = t.slides.find((e) => e.getAttribute("data-hash") === s);
                             if (!e) return 0;
-                            return parseInt(e.getAttribute("data-swiper-slide-index"), 10);
+                            return parseInt(e.getAttribute("data-swiper-slide-2-index"), 10);
                         }
                         return t.getSlideIndex(
                             f(
                                 t.slidesEl,
-                                `.${t.params.slideClass}[data-hash="${s}"], swiper-slide[data-hash="${s}"]`
+                                `.${t.params.slideClass}[data-hash="${s}"], swiper-slide-2[data-hash="${s}"]`
                             )[0]
                         );
                     },
@@ -6294,7 +6294,7 @@ var Swiper = (function () {
                     s =
                         t.virtual && t.params.virtual.enabled
                             ? t.slidesEl.querySelector(
-                                `[data-swiper-slide-index="${t.activeIndex}"]`
+                                `[data-swiper-slide-2-index="${t.activeIndex}"]`
                             )
                             : t.slides[t.activeIndex];
                 if (e !== (s ? s.getAttribute("data-hash") : "")) {
@@ -6308,7 +6308,7 @@ var Swiper = (function () {
                     const e =
                         t.virtual && t.params.virtual.enabled
                             ? t.slidesEl.querySelector(
-                                `[data-swiper-slide-index="${t.activeIndex}"]`
+                                `[data-swiper-slide-2-index="${t.activeIndex}"]`
                             )
                             : t.slides[t.activeIndex],
                         s = e
@@ -6407,7 +6407,7 @@ var Swiper = (function () {
                             ((e =
                                 i.virtual && i.params.virtual.enabled
                                     ? i.slides.find((e) =>
-                                        e.classList.contains("swiper-slide-active")
+                                        e.classList.contains("swiper-slide-2-active")
                                     )
                                     : i.slides[i.activeIndex]),
                                 !e)
@@ -6562,7 +6562,7 @@ var Swiper = (function () {
                     swiper: null,
                     multipleActiveThumbs: !0,
                     autoScrollOffset: 0,
-                    slideThumbActiveClass: "swiper-slide-thumb-active",
+                    slideThumbActiveClass: "swiper-slide-2-thumb-active",
                     thumbsContainerClass: "swiper-thumbs",
                 },
             });
@@ -6578,7 +6578,7 @@ var Swiper = (function () {
                 if (null == s) return;
                 let i;
                 (i = e.params.loop
-                    ? parseInt(e.clickedSlide.getAttribute("data-swiper-slide-index"), 10)
+                    ? parseInt(e.clickedSlide.getAttribute("data-swiper-slide-2-index"), 10)
                     : s),
                     t.params.loop ? t.slideToLoop(i) : t.slideTo(i);
             }
@@ -6636,7 +6636,7 @@ var Swiper = (function () {
                     for (let e = 0; e < i; e += 1)
                         f(
                             s.slidesEl,
-                            `[data-swiper-slide-index="${t.realIndex + e}"]`
+                            `[data-swiper-slide-2-index="${t.realIndex + e}"]`
                         ).forEach((e) => {
                             e.classList.add(r);
                         });
@@ -6652,7 +6652,7 @@ var Swiper = (function () {
                     if (s.params.loop) {
                         const e = s.slides.find(
                             (e) =>
-                                e.getAttribute("data-swiper-slide-index") === `${t.realIndex}`
+                                e.getAttribute("data-swiper-slide-2-index") === `${t.realIndex}`
                         );
                         (r = s.slides.indexOf(e)),
                             (o = t.activeIndex > t.previousIndex ? "next" : "prev");
@@ -7077,16 +7077,16 @@ var Swiper = (function () {
             });
             const i = (e, t, s) => {
                 let a = s
-                    ? e.querySelector(".swiper-slide-shadow-left")
-                    : e.querySelector(".swiper-slide-shadow-top"),
+                    ? e.querySelector(".swiper-slide-2-shadow-left")
+                    : e.querySelector(".swiper-slide-2-shadow-top"),
                     i = s
-                        ? e.querySelector(".swiper-slide-shadow-right")
-                        : e.querySelector(".swiper-slide-shadow-bottom");
+                        ? e.querySelector(".swiper-slide-2-shadow-right")
+                        : e.querySelector(".swiper-slide-2-shadow-bottom");
                 a ||
                     ((a = v(
                         "div",
                         (
-                            "swiper-slide-shadow-cube swiper-slide-shadow-" +
+                            "swiper-slide-2-shadow-cube swiper-slide-2-shadow-" +
                             (s ? "left" : "top")
                         ).split(" ")
                     )),
@@ -7095,7 +7095,7 @@ var Swiper = (function () {
                     ((i = v(
                         "div",
                         (
-                            "swiper-slide-shadow-cube swiper-slide-shadow-" +
+                            "swiper-slide-2-shadow-cube swiper-slide-2-shadow-" +
                             (s ? "right" : "bottom")
                         ).split(" ")
                     )),
@@ -7135,7 +7135,7 @@ var Swiper = (function () {
                     for (let e = 0; e < a.length; e += 1) {
                         const t = a[e];
                         let s = e;
-                        m && (s = parseInt(t.getAttribute("data-swiper-slide-index"), 10));
+                        m && (s = parseInt(t.getAttribute("data-swiper-slide-2-index"), 10));
                         let r = 90 * s,
                             n = Math.floor(r / 360);
                         l && ((r = -r), (n = Math.floor(-r / 360)));
@@ -7196,7 +7196,7 @@ var Swiper = (function () {
                             (t.style.transitionDuration = `${e}ms`),
                                 t
                                     .querySelectorAll(
-                                        ".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left"
+                                        ".swiper-slide-2-shadow-top, .swiper-slide-2-shadow-right, .swiper-slide-2-shadow-bottom, .swiper-slide-2-shadow-left"
                                     )
                                     .forEach((t) => {
                                         t.style.transitionDuration = `${e}ms`;
@@ -7233,11 +7233,11 @@ var Swiper = (function () {
             s({ flipEffect: { slideShadows: !0, limitRotation: !0 } });
             const i = (e, s) => {
                 let a = t.isHorizontal()
-                    ? e.querySelector(".swiper-slide-shadow-left")
-                    : e.querySelector(".swiper-slide-shadow-top"),
+                    ? e.querySelector(".swiper-slide-2-shadow-left")
+                    : e.querySelector(".swiper-slide-2-shadow-top"),
                     i = t.isHorizontal()
-                        ? e.querySelector(".swiper-slide-shadow-right")
-                        : e.querySelector(".swiper-slide-shadow-bottom");
+                        ? e.querySelector(".swiper-slide-2-shadow-right")
+                        : e.querySelector(".swiper-slide-2-shadow-bottom");
                 a || (a = fe("flip", e, t.isHorizontal() ? "left" : "top")),
                     i || (i = fe("flip", e, t.isHorizontal() ? "right" : "bottom")),
                     a && (a.style.opacity = Math.max(-s, 0)),
@@ -7278,7 +7278,7 @@ var Swiper = (function () {
                         (t.style.transitionDuration = `${e}ms`),
                             t
                                 .querySelectorAll(
-                                    ".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left"
+                                    ".swiper-slide-2-shadow-top, .swiper-slide-2-shadow-right, .swiper-slide-2-shadow-bottom, .swiper-slide-2-shadow-left"
                                 )
                                 .forEach((t) => {
                                     t.style.transitionDuration = `${e}ms`;
@@ -7364,11 +7364,11 @@ var Swiper = (function () {
                                     r.slideShadows)
                             ) {
                                 let e = n
-                                    ? t.querySelector(".swiper-slide-shadow-left")
-                                    : t.querySelector(".swiper-slide-shadow-top"),
+                                    ? t.querySelector(".swiper-slide-2-shadow-left")
+                                    : t.querySelector(".swiper-slide-2-shadow-top"),
                                     s = n
-                                        ? t.querySelector(".swiper-slide-shadow-right")
-                                        : t.querySelector(".swiper-slide-shadow-bottom");
+                                        ? t.querySelector(".swiper-slide-2-shadow-right")
+                                        : t.querySelector(".swiper-slide-2-shadow-bottom");
                                 e || (e = fe("coverflow", t, n ? "left" : "top")),
                                     s || (s = fe("coverflow", t, n ? "right" : "bottom")),
                                     e && (e.style.opacity = u > 0 ? u : 0),
@@ -7383,7 +7383,7 @@ var Swiper = (function () {
                                 (t.style.transitionDuration = `${e}ms`),
                                     t
                                         .querySelectorAll(
-                                            ".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left"
+                                            ".swiper-slide-2-shadow-top, .swiper-slide-2-shadow-right, .swiper-slide-2-shadow-bottom, .swiper-slide-2-shadow-left"
                                         )
                                         .forEach((t) => {
                                             t.style.transitionDuration = `${e}ms`;
@@ -7482,7 +7482,7 @@ var Swiper = (function () {
                                     : 1 - (1 - g.opacity) * p * n,
                             E = `translate3d(${v}) ${w} ${b}`;
                         if ((f && g.shadow) || !f) {
-                            let e = a.querySelector(".swiper-slide-shadow");
+                            let e = a.querySelector(".swiper-slide-2-shadow");
                             if ((!e && g.shadow && (e = fe("creative", a)), e)) {
                                 const t = r.shadowPerProgress ? c * (1 / r.limitProgress) : c;
                                 e.style.opacity = Math.min(Math.max(Math.abs(t), 0), 1);
@@ -7498,7 +7498,7 @@ var Swiper = (function () {
                     const s = t.slides.map((e) => h(e));
                     s.forEach((t) => {
                         (t.style.transitionDuration = `${e}ms`),
-                            t.querySelectorAll(".swiper-slide-shadow").forEach((t) => {
+                            t.querySelectorAll(".swiper-slide-2-shadow").forEach((t) => {
                                 t.style.transitionDuration = `${e}ms`;
                             });
                     }),
@@ -7586,7 +7586,7 @@ var Swiper = (function () {
                                 S = `\n        translate3d(${m}, ${h}, ${f}px)\n        rotateZ(${i.rotate ? (a ? -v : v) : 0
                                     }deg)\n        scale(${x})\n      `;
                             if (i.slideShadows) {
-                                let e = d.querySelector(".swiper-slide-shadow");
+                                let e = d.querySelector(".swiper-slide-2-shadow");
                                 e || (e = fe("cards", d)),
                                     e &&
                                     (e.style.opacity = Math.min(
@@ -7602,7 +7602,7 @@ var Swiper = (function () {
                         const s = t.slides.map((e) => h(e));
                         s.forEach((t) => {
                             (t.style.transitionDuration = `${e}ms`),
-                                t.querySelectorAll(".swiper-slide-shadow").forEach((t) => {
+                                t.querySelectorAll(".swiper-slide-2-shadow").forEach((t) => {
                                     t.style.transitionDuration = `${e}ms`;
                                 });
                         }),
